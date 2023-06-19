@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CitationController!{% endblock %}
+
+{% block body %}
+
+    <div class="mt-5">
+        <form action="{{ path('app_citation_save_by_user') }}">
+
+            <h2>{{ citation.citation.citation }}</h2>
+            <p>{{ citation.citation.infos.personnage }}</p>
+
+            <input type="hidden" name="content" value="{{ citation.citation.citation }}">
+            <input type="hidden" name="character" value="{{ citation.citation.infos.personnage }}">
+
+            {% if app.user %}
+                <button class="btn btn-primary" type="submit">Save</button>
+            {% endif %}
+        </form>
+        <a class="btn btn-warning" href="">change joke</a>
+    </div>
+
+{% endblock %}

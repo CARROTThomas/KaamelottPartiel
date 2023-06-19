@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CitationController!{% endblock %}
+
+{% block body %}
+    <div class="d-flex row mt-5">
+        {% for citation in citations %}
+            <div class="m-1 p-1 d-flex justify-content-between align-items-center">
+                <form action="{{ path('app_citation_save_by_user') }}">
+
+                    <h2>{{ citation.quote }}</h2>
+                    <p>{{ citation.caractere }}</p>
+
+                    <input type="hidden" name="content" value="{{ citation.quote }}">
+                    <input type="hidden" name="character" value="{{ citation.caractere }}">
+
+                    {% if app.user %}
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    {% endif %}
+                </form>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
