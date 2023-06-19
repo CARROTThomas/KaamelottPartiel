@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CitationRepository::class)]
 class Citation
@@ -14,18 +15,23 @@ class Citation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('quote:read')]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups('quote:read')]
     private ?string $quote = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups('quote:read')]
     private ?string $caractere = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'citations')]
+    #[Groups('quote:read')]
     private Collection $author;
 
     #[ORM\Column]
+    #[Groups('quote:read')]
     private ?int $countSave = null;
 
     public function __construct()

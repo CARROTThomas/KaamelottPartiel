@@ -27,7 +27,7 @@ class CitationController extends AbstractController
     }
 
     #[Route('/populary', name: 'populary_quotes')]
-    public function populary(CitationRepository $citationRepository): Response
+    public function populary(CitationRepository $citationRepository, Request $request): Response
     {
         $citationPopulaires = $citationRepository->findBy(array(), ["countSave"=>"DESC"], 3, null);
 
@@ -76,6 +76,7 @@ class CitationController extends AbstractController
 
         else {
             if ($citation) {
+                $citation->getCountSave()-1;
                 $this->getUser()->removeCitation($citation);
             }
 
